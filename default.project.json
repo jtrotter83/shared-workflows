@@ -1,0 +1,9 @@
+{
+  "name": "shared-workflows-selftest",
+  "tree": {
+    "$className": "DataModel",
+    "ServerScriptService": {
+      "$path": "luau-src"
+    }
+  }
+}

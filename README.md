@@ -21,11 +21,11 @@ threshold → build → `npm audit --audit-level=high` (fails on high/critical).
 
 **Inputs**
 
-| Input | Type | Default | Description |
-|---|---|---|---|
-| `node-version` | string | `"22"` | Node.js version |
+| Input                  | Type    | Default | Description                   |
+| ---------------------- | ------- | ------- | ----------------------------- |
+| `node-version`         | string  | `"22"`  | Node.js version               |
 | `enable-pages-preview` | boolean | `false` | Deploy a Pages preview on PRs |
-| `coverage-threshold` | number | `80` | Minimum line coverage (%) |
+| `coverage-threshold`   | number  | `80`    | Minimum line coverage (%)     |
 
 Note: the repo needs `@vitest/coverage-v8` in devDependencies for coverage.
 Pages preview deploys to a `pr-<number>` environment with base path
@@ -46,8 +46,8 @@ build.rbxl` validates the project JSON and tree structure).
 
 **Inputs**
 
-| Input | Type | Default | Description |
-|---|---|---|---|
+| Input        | Type   | Default | Description                        |
+| ------------ | ------ | ------- | ---------------------------------- |
 | `source-dir` | string | `"src"` | Directory checked by StyLua/Selene |
 
 ## pr-title.yml — conventional commits PR titles
