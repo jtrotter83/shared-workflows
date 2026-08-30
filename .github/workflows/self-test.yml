@@ -1,0 +1,14 @@
+name: self-test
+on:
+  push:
+    branches: [test/self-test]
+  workflow_dispatch:
+jobs:
+  ts:
+    uses: ./.github/workflows/ci-ts.yml
+    with:
+      node-version: "22"
+  luau:
+    uses: ./.github/workflows/ci-luau.yml
+  title:
+    uses: ./.github/workflows/pr-title.yml
