@@ -1,0 +1,26 @@
+name: "PR title"
+
+on:
+  pull_request:
+    types: [opened, edited, reopened, synchronize]
+
+permissions:
+  pull-requests: read
+
+jobs:
+  validate:
+    name: Conventional commits title
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate PR title
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = context.payload.pull_request.title;
+            const re = /^(feat|fix|docs|style|refactor|test|chore|ci|perf|hotfix)(\(.+\))?!?: .+/;
+            if (!re.test(title)) {
+              core.setFailed(
+                `PR title "${title}" does not match conventional commits format.\n` +
+                `Expected: (feat|fix|docs|style|refactor|test|chore|ci|perf|hotfix)(scope)?!: description`
+              );
+            }

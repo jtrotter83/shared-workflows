@@ -1,0 +1,52 @@
+name: "CI (Roblox / Luau)"
+
+on:
+  workflow_call:
+    inputs:
+      source-dir:
+        description: "Source directory to check with StyLua"
+        type: string
+        default: "src"
+
+jobs:
+  luau-ci:
+    name: StyLua, Selene, Rojo build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install StyLua
+        run: |
+          curl -fsSL https://github.com/JohnnyMorganz/StyLua/releases/latest/download/stylua-linux.zip -o stylua.zip
+          unzip -o stylua.zip
+          chmod +x stylua
+          sudo mv stylua /usr/local/bin/stylua
+
+      - name: Format check (StyLua)
+        run: stylua --check ${{ inputs.source-dir }}
+
+      - name: Install Selene
+        run: |
+          curl -fsSL https://github.com/kampfkarren/selene/releases/latest/download/selene-linux.zip -o selene.zip
+          unzip -o selene.zip
+          chmod +x selene
+          sudo mv selene /usr/local/bin/selene
+
+      - name: Lint (Selene)
+        run: selene ${{ inputs.source-dir }}
+
+      - name: Install Rojo
+        run: |
+          curl -fsSL https://github.com/rojo-rbx/rojo/releases/latest/download/rojo-linux.zip -o rojo.zip
+          unzip -o rojo.zip
+          chmod +x rojo
+          sudo mv rojo /usr/local/bin/rojo
+
+      - name: Build smoke test (Rojo)
+        run: |
+          project=$(ls default.project.json *.project.json 2>/dev/null | head -n1)
+          if [ -z "$project" ]; then
+            echo "No .project.json found" >&2
+            exit 1
+          fi
+          rojo build "$project" -o build.rbxl
