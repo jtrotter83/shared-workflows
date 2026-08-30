@@ -4,7 +4,5 @@ on:
     branches: [test/self-test]
   workflow_dispatch:
 jobs:
-  ts:
-    uses: ./.github/workflows/ci-ts.yml
-    with:
-      coverage-threshold: 100
+  luau:
+    uses: ./.github/workflows/ci-luau.yml
