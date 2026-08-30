@@ -17,30 +17,30 @@ jobs:
 
       - name: Install StyLua
         run: |
-          curl -fsSL https://github.com/JohnnyMorganz/StyLua/releases/latest/download/stylua-linux.zip -o stylua.zip
-          unzip -o stylua.zip
-          chmod +x stylua
-          sudo mv stylua /usr/local/bin/stylua
+          gh release download --repo JohnnyMorganz/StyLua --pattern 'stylua-linux-x86_64.zip' --output stylua.zip
+          unzip -o stylua.zip && chmod +x stylua && sudo mv stylua /usr/local/bin/stylua
+        env:
+          GH_TOKEN: ${{ github.token }}
 
       - name: Format check (StyLua)
         run: stylua --check ${{ inputs.source-dir }}
 
       - name: Install Selene
         run: |
-          curl -fsSL https://github.com/kampfkarren/selene/releases/latest/download/selene-linux.zip -o selene.zip
-          unzip -o selene.zip
-          chmod +x selene
-          sudo mv selene /usr/local/bin/selene
+          gh release download --repo kampfkarren/selene --pattern 'selene-[0-9]*-linux.zip' --output selene.zip
+          unzip -o selene.zip && chmod +x selene && sudo mv selene /usr/local/bin/selene
+        env:
+          GH_TOKEN: ${{ github.token }}
 
       - name: Lint (Selene)
         run: selene ${{ inputs.source-dir }}
 
       - name: Install Rojo
         run: |
-          curl -fsSL https://github.com/rojo-rbx/rojo/releases/latest/download/rojo-linux.zip -o rojo.zip
-          unzip -o rojo.zip
-          chmod +x rojo
-          sudo mv rojo /usr/local/bin/rojo
+          gh release download --repo rojo-rbx/rojo --pattern 'rojo-*-linux-x86_64.zip' --output rojo.zip
+          unzip -o rojo.zip && chmod +x rojo && sudo mv rojo /usr/local/bin/rojo
+        env:
+          GH_TOKEN: ${{ github.token }}
 
       - name: Build smoke test (Rojo)
         run: |
