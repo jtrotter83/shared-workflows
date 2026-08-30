@@ -4,6 +4,12 @@ Reusable GitHub Actions workflows for jtrotter83 repos. A reusable workflow must
 live on the default branch of this repo to be callable, so changes here roll out
 to all callers once merged to `main`.
 
+> **Important (private-account limitation):** GitHub only allows cross-repo
+> calls to reusable workflows that are **public** or in the **same
+> organization**. Since this is a private repo under a personal account,
+> callers in other repos cannot resolve it until this repo is made public or
+> the repos move into an org.
+
 ## ci-ts.yml — TypeScript / web repos
 
 ```yaml
@@ -21,11 +27,11 @@ threshold → build → `npm audit --audit-level=high` (fails on high/critical).
 
 **Inputs**
 
-| Input | Type | Default | Description |
-|---|---|---|---|
-| `node-version` | string | `"22"` | Node.js version |
+| Input                  | Type    | Default | Description                   |
+| ---------------------- | ------- | ------- | ----------------------------- |
+| `node-version`         | string  | `"22"`  | Node.js version               |
 | `enable-pages-preview` | boolean | `false` | Deploy a Pages preview on PRs |
-| `coverage-threshold` | number | `80` | Minimum line coverage (%) |
+| `coverage-threshold`   | number  | `80`    | Minimum line coverage (%)     |
 
 Note: the repo needs `@vitest/coverage-v8` in devDependencies for coverage.
 Pages preview deploys to a `pr-<number>` environment with base path
@@ -46,8 +52,8 @@ build.rbxl` validates the project JSON and tree structure).
 
 **Inputs**
 
-| Input | Type | Default | Description |
-|---|---|---|---|
+| Input        | Type   | Default | Description                        |
+| ------------ | ------ | ------- | ---------------------------------- |
 | `source-dir` | string | `"src"` | Directory checked by StyLua/Selene |
 
 ## pr-title.yml — conventional commits PR titles
