@@ -4,5 +4,7 @@ on:
     branches: [test/self-test]
   workflow_dispatch:
 jobs:
-  title:
-    uses: ./.github/workflows/pr-title.yml
+  ts:
+    uses: ./.github/workflows/ci-ts.yml
+    with:
+      coverage-threshold: 100
