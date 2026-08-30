@@ -1,8 +1,0 @@
-name: self-test
-on:
-  push:
-    branches: [test/self-test]
-  workflow_dispatch:
-jobs:
-  luau:
-    uses: ./.github/workflows/ci-luau.yml
