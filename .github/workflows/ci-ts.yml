@@ -16,9 +16,6 @@ on:
         type: number
         default: 80
 
-permissions:
-  contents: read
-
 jobs:
   ci:
     name: Lint, Type-check, Test, Build

@@ -27,7 +27,7 @@ jobs:
 
       - name: Install Selene
         run: |
-          gh release download --repo kampfkarren/selene --pattern 'selene-*-linux.zip' --output selene.zip
+          gh release download --repo kampfkarren/selene --pattern 'selene-[0-9]*-linux.zip' --output selene.zip
           unzip -o selene.zip && chmod +x selene && sudo mv selene /usr/local/bin/selene
         env:
           GH_TOKEN: ${{ github.token }}
